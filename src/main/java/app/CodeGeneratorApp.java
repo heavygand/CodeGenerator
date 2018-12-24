@@ -9,7 +9,8 @@ import helpers.H;
 public class CodeGeneratorApp {
 
 	private static final String XML_PATH = "./Diagrams/MessageOrganizer.xml";
-	private static final String classStart = "./Codes/classStart.txt";
+	private static final String classStartPath = "./Codes/classStart.txt";
+	private static final String generatePath = "./src/main/java";
 	private static NodeList mxCellElements;
 	private static NodeList objectElements;
 	private static ArrayList<Klasse> klassen = new ArrayList<>();
@@ -27,7 +28,11 @@ public class CodeGeneratorApp {
 
 		klassen.forEach(klasse -> {
 			
-			H.
+			String classStart = H.readFile(classStartPath);
+			
+			String path = generatePath+"/"+klasse.getName()+".java";
+			H.overWriteFile("public class " + klasse.getName() + " {", path);
+			H.appendToFile("}", path);
 		});
 	}
 
